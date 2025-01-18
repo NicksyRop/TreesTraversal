@@ -1,5 +1,8 @@
 package com.udemytesting.trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author nnkipkorir
  * created 18/01/2025
@@ -12,8 +15,39 @@ public class Main {
         Node data = createData();
 
        // preOrderTraversal(data);
-        postOrderTraversal(data);
+       // postOrderTraversal(data);
+       // inOrderTraversal(data);
 
+        levelOrderTraversal(data);
+
+
+    }
+
+    /**
+     * level order traversal can be implemented using a queue , FIFO
+     * Add the root node , while popping - add its left , right element to the queue
+     *
+     */
+    public static void levelOrderTraversal(Node n) {
+        Queue<Node> queue = new LinkedList<>();
+        //add the root element
+        queue.add(n);
+
+        //use while loop
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            //print the value of the processed node
+            System.out.println(current.value);
+            //add left child
+            if(current.left != null) {
+                queue.add(current.left);
+            }
+
+            //add right
+            if(current.right != null) {
+                queue.add(current.right);
+            }
+        }
     }
 
     /**
@@ -33,6 +67,7 @@ public class Main {
         preOrderTraversal(n.left);
         // will be called with value n = e
         preOrderTraversal(n.right);
+
     }
 
     /**
